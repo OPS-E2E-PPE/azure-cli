@@ -1,0 +1,36 @@
+name: 🚀 Manually Trigger Deployment (via Web)
+
+on:
+  workflow_dispatch:
+    inputs:
+      ref:
+        type: string
+        description: 'Branch, tag, or commit SHA to deploy'
+        required: true
+        default: 'main'
+      environment:
+        type: string
+        description: 'Deployment environment (e.g., staging, production)'
+        required: true
+        default: 'debug-env'
+
+jobs:
+  create-deployment:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Create GitHub Deployment
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # GitHub 自动提供，无需额外配置！
+        run: |
+          curl -X POST \
+            -H "Authorization: Bearer $GH_TOKEN" \
+            -H "Accept: application/vnd.github+json" \
+            -H "X-GitHub-Api-Version: 2022-11-28" \
+            https://api.github.com/repos/${{ github.repository }}/deployments \
+            -d '{
+              "ref": "${{ github.event.inputs.ref }}",
+              "environment": "${{ github.event.inputs.environment }}",
+              "description": "Manual trigger from web UI",
+              "auto_merge": false,
+              "required_contexts": []
+            }'
