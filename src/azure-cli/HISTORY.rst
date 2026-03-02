@@ -3,6 +3,140 @@
 Release History
 ===============
 
+2.84.0
+++++++
+
+**AKS**
+
+* `az aks create`: Add `--enable-container-network-logs` parameter to enable container network logs (#32700)
+* `az aks update`: Add `--enable-container-network-logs` and `--disable-container-network-logs` parameters to enable and disable container network logs (#32700)
+* `az aks enable-addons`: Add support for default workspace creation in Bleu and Delos clouds (#32753)
+
+**App Service**
+
+* `az webapp create/config set`: Fix vnet routing to use site-level outbound vnet routing property for API version `2024-11-01` (#32634)
+* `az webapp vnet-integration add`: Fix vnet routing to use site-level outbound vnet routing property for API version `2024-11-01` (#32634)
+* `az functionapp create/vnet-integration add`: Fix vnet routing to use site-level outbound vnet routing property for API version `2024-11-01` (#32634)
+* `az webapp config access-restriction show`: Update to always return values in camel case (#32492)
+* `az webapp list runtimes`: Update logic to include missing Java versions and remove hardcoded lists (#32461)
+* `az webapp create/update`: Add `--end-to-end-encryption-enabled` parameter to support enabling or disabling end-to-end encryption between the front end and the workers (#32629)
+* `az webapp create`: Add `--min-tls-version` parameter to specify the minimum version of TLS (#32629)
+* `az webapp create`: Add `--min-tls-cipher-suite` parameter to specify the minimum TLS Cipher Suite (#32629)
+
+**ARM**
+
+* `az bicep decompile-params`: Add new parameter `--force` to overwrite existing files (#32739)
+* `az deployment`: Fix the issue where the Bicep installation message is printed in the command output (#32552)
+* `az stack group/sub/mg create/validate`: Add `--resources-without-delete-support` parameter to support defining what happens to resources that do not support deletion when they are no longer managed by the stack (#32777)
+* `az stack group/sub/mg create/validate`: Add `--validation-level` parameter to support specifying validation level for the deployment stack (#32777)
+* `az stack group/sub/mg delete`: Add `--resources-without-delete-support` parameter to support defining what happens to resources that do not support deletion when they are no longer managed by the stack (#32777)
+
+**Compute**
+
+* `az vm create`: Add parameters `--data-disk-mbps` and `--data-disk-iops` to support IOPS and MBPS (#32717)
+
+**Container app**
+
+* `az containerapp job create`: Set default values to `--parallelism` and `--replica-completion-count` parameters (#32745)
+
+**Cosmos DB**
+
+* `az cosmosdb update`: Add support for Microsoft Fabric workspace resource IDs in `--network-acl-bypass-resource-ids` (#32797)
+* Fix #32608: `az cosmosdb restore`: Fix "Database Account does not exist" error during polling (#32752)
+
+**Maps**
+
+* `az maps account create`: Add default value for `--sku` (#32711)
+
+**MySQL**
+
+* Fix #32217: `az mysql flexible-server restore`: Fix `--no-wait` flag (#32744)
+
+**Network**
+
+* `az network application-gateway ssl-cert`: Support dedicated backend connection (#32784)
+
+**PostgreSQL**
+
+* `az postgres flexible-server migrate-network`: Add new command to support migrating the network mode of a flexible server (#32819)
+
+**SQL**
+
+* `az sql server/db`: Add support for versionless TDE keys (#32764)
+* `az sql server create/update`: Add `--soft-delete-retention-days` (#32245)
+* `az sql server deleted-server show/list`: Add new command (#32245)
+* `az sql server restore`: Add new command (#32245)
+
+**Storage**
+
+* `az storage share close-handle`: Fix failing to close file handle when in delete pending state (#32697)
+
+2.83.0
+++++++
+
+**ACR**
+
+* `az acr config content-trust update`: Add breaking changes announcement that `enabled` status will no longer be accepted (#32462)
+* `az acr check-health`: Add breaking change announcement that Notary client check will be removed (#32462)
+
+**AKS**
+
+* `az aks create`: Enable ACStor v2 without any storage options on a new cluster by `--enable-azure-container-storage` parameter (#32558)
+* `az aks update`: Enable the ephemeral disk storage option of ACStor v2 by `--enable-azure-container-storage ephemeralDisk` parameter (#32558)
+* `az aks update`: Disable the elastic SAN storage option of ACStor v2 by `--disable-azure-container-storage elasticSan` parameter (#32558)
+* `az aks update`: Disable ACStor v2 by `--disable-azure-container-storage` parameter (#32558)
+
+**App Config**
+
+* `az appconfig`: Add option `anonymous` for `--auth-mode` parameter (#32639)
+
+**App Service**
+
+* Fix #32290: `az functionapp config appsettings set`: Fix command failure when using `--slot-settings` parameter to update existing slot settings (#32291)
+
+**Cognitive Services**
+
+* `az cognitiveservices agent logs show`: Add console log streaming for hosted agents (#32701)
+* `az cognitiveservices agent create`: Add `--show-logs` flag for deployment troubleshooting (#32701)
+* `az cognitiveservices agent start`: Add `--show-logs` and `--timeout` flags (#32701)
+
+**Container app**
+
+* `az containerapp env create`: Update the error display for ConsumptionOnly environment creation (#32648)
+
+**MySQL**
+
+* `az mysql flexible-server restore`: Support restore server to different subscription (#32620)
+* `az mysql flexible-server geo-restore`: Support geo restore server to different subscription (#32620)
+* `az mysql flexible-server replica create`: Support create server replica to different subscription (#32620)
+
+**Network**
+
+* `az network vnet-gateway`: Add identity-related parameters and subgroup (#32524)
+* `az network vpn-connection`: Add `--auth-type` and `--cert-auth` parameters (#32524)
+* `az network virtual-network-appliance`: Support Virtual Network Appliance feature (#32645)
+* `az network ddos-custom-policy`: Support DDoS Policy Customization (#32673)
+
+**Packaging**
+
+* Optimize MSI upgrade performance by simplifying file replacement logic (#32678)
+
+**PostgreSQL**
+
+* `az postgres flexible-server create/georestore/replica`: Allow SSDV2 servers to perform create replica and geo restore (#32649)
+
+**Profile**
+
+* `az login`: For managed identity authentication, no longer retrieve the FQDN of the machine, bypassing hanging or error caused by misconfigured network setup (#32611)
+
+**Storage**
+
+* Fix #32503: `az storage file list`: Fix listing files when using Oauth without Reader access (#32602)
+* `az storage account file-service-properties update`: Add `--require-smb-encryption-in-transit` and `--require-nfs-encryption-in-transit` (#32619)
+* `az storage account create/update`: Add `--publish-ipv6-endpoint` (#26826)
+* `az storage account network-rule add/remove`: Add `--ipv6-address` (#26826)
+* `az storage account create/update`: Set `--min-tls-version` to `tls1_2` if the value provided is `tls1_0` and `tls1_1` (#32652)
+
 2.82.0
 ++++++
 

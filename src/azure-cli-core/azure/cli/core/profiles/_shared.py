@@ -107,6 +107,7 @@ class ResourceType(Enum):  # pylint: disable=too-few-public-methods
     MGMT_MAPS = ('azure.mgmt.maps', None)
     MGMT_POLICYINSIGHTS = ('azure.mgmt.policyinsights', None)
     MGMT_RDBMS = ('azure.mgmt.rdbms', None)
+    MGMT_POSTGRESQL = ('azure.mgmt.postgresql', None)
     MGMT_REDIS = ('azure.mgmt.redis', None)
     MGMT_SEARCH = ('azure.mgmt.search', None)
     MGMT_SERVICEFABRIC = ('azure.mgmt.servicefabric', None)
@@ -217,7 +218,7 @@ AZURE_API_PROFILES = {
         ResourceType.MGMT_IOTHUB: None,
         ResourceType.MGMT_IOTDPS: None,
         ResourceType.MGMT_IOTCENTRAL: None,
-        ResourceType.MGMT_ARO: '2023-11-22',
+        ResourceType.MGMT_ARO: None,
         ResourceType.MGMT_DATABOXEDGE: '2021-02-01-preview',
         ResourceType.MGMT_CUSTOMLOCATION: '2021-03-15-preview',
         ResourceType.MGMT_CONTAINERSERVICE: None,
